@@ -20,10 +20,19 @@ body{
     justify-content: center;
 }
 
-#input{
+#buttons{
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+#input-button, #clear-grid-button{
     width: 140px;
     height: 28px;
     border-radius: 8px;
+}
+
+#input-button{
     color: rgb(7, 24, 1);
     background-color: rgb(118, 234, 143);
 }

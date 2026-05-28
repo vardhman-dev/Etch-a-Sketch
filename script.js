@@ -5,18 +5,17 @@ Basic Specs:
 -color cells over hovering.
 */
 
-function createGrid(userInput=16) {
-    if(userInput != 16){
-        //clear grid
-        const container = document.querySelector("#container");
-        const cellGroup = container.querySelectorAll(".cell");
-        cellGroup.forEach(cell => {
-            cell.remove();
-        });
-    }
+function removeGrid(){
+    const container = document.querySelector("#container");
+    const cellGroup = container.querySelectorAll(".cell");
+    cellGroup.forEach(cell => {
+        cell.remove();
+    });
+}
 
-    
-    let cellsPerRow = userInput;
+function updateGrid(userInput){
+    removeGrid();
+let cellsPerRow = userInput;
     let cellsPerColumn = userInput;
     let totalCells = cellsPerColumn * cellsPerRow;
 
@@ -27,6 +26,26 @@ function createGrid(userInput=16) {
         // removed 1.6px due to left and right borders of 0.8px
         cell.style.width = `${(600 / userInput) - 1.6}px`;
         cell.style.height = `${(600 / userInput) - 1.6}px`;
+        cell.style.border = "1px solid black";
+
+        const container = document.querySelector("#container");
+        container.appendChild(cell);
+    }
+   
+}
+
+function createGrid() {
+    let cellsPerRow = 16;
+    let cellsPerColumn = 16;
+    let totalCells = cellsPerColumn * cellsPerRow;
+
+    for (let i = 0; i < totalCells; i++) {
+        let cell = document.createElement("div");
+        cell.classList.add("cell");
+
+        // removed 1.6px due to left and right borders of 0.8px
+        cell.style.width = `${(600 / 16) - 1.6}px`;
+        cell.style.height = `${(600 / 16) - 1.6}px`;
         cell.style.border = "1px solid black";
 
         const container = document.querySelector("#container");
@@ -48,13 +67,22 @@ function listener() {
 
 listener();
 
-let input = document.querySelector("#input");
+let input = document.querySelector("#input-button");
 input.addEventListener("click", () => {
     let userInput = +prompt("Enter a number between 1 and 100", 1);
     if(userInput > 100 || userInput < 1 || !Number.isInteger(userInput)){
         alert("Please enter a valid input");
     }
     else{
-       createGrid(userInput);
+       updateGrid(userInput);
     }
+});
+
+let clear = document.querySelector("#clear-grid-button");
+clear.addEventListener("click", () =>{
+    let container = document.querySelector("#container");
+    let cellGroup = container.querySelectorAll(".cell");
+    cellGroup.forEach(cell => {
+        cell.style.backgroundColor = "white";
+    });
 });
