@@ -2,7 +2,7 @@ body{
     height: 100vh;
     margin: 0;
     padding: 10px;
-    background-color: rgb(138, 130, 130);
+    background-color: rgb(109, 228, 255);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,7 +21,9 @@ body{
 }
 
 #input{
+    width: 140px;
+    height: 28px;
     border-radius: 8px;
-    color: aliceblue;
-    background-color: black;
+    color: rgb(7, 24, 1);
+    background-color: rgb(118, 234, 143);
 }
