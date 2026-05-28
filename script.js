@@ -5,10 +5,19 @@ Basic Specs:
 -color cells over hovering.
 */
 
-function createGrid() {
+function createGrid(userInput=16) {
+    if(userInput != 16){
+        //clear grid
+        const container = document.querySelector("#container");
+        const cellGroup = container.querySelectorAll(".cell");
+        cellGroup.forEach(cell => {
+            cell.remove();
+        });
+    }
 
-    let cellsPerRow = 16;
-    let cellsPerColumn = 16;
+    
+    let cellsPerRow = userInput;
+    let cellsPerColumn = userInput;
     let totalCells = cellsPerColumn * cellsPerRow;
 
     for (let i = 0; i < totalCells; i++) {
@@ -16,13 +25,14 @@ function createGrid() {
         cell.classList.add("cell");
 
         // removed 1.6px due to left and right borders of 0.8px
-        cell.style.width = `${(600 / 16) - 1.6}px`;
-        cell.style.height = `${(600 / 16) - 1.6}px`;
+        cell.style.width = `${(600 / userInput) - 1.6}px`;
+        cell.style.height = `${(600 / userInput) - 1.6}px`;
         cell.style.border = "1px solid black";
 
         const container = document.querySelector("#container");
         container.appendChild(cell);
     }
+   
 }
 
 createGrid();
@@ -41,10 +51,10 @@ listener();
 let input = document.querySelector("#input");
 input.addEventListener("click", () => {
     let userInput = +prompt("Enter a number between 1 and 100", 1);
-    if(userInput > 100 || userInput < 1){
+    if(userInput > 100 || userInput < 1 || !Number.isInteger(userInput)){
         alert("Please enter a valid input");
     }
     else{
-        updateGrid(userInput);
+       createGrid(userInput);
     }
 });
